@@ -9,8 +9,8 @@
 # software components inside the image are under the respective
 # licenses chosen by their respective copyright holders.
 #
-FROM ubuntu:22.04
-MAINTAINER Thomas Weise <tweise@hfuu.edu.cn>
+FROM ubuntu:22.10
+LABEL MAINTAINER="Sanjib Kumar Sen <sksenonline@gmail.com>" 
 
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
@@ -43,75 +43,76 @@ RUN echo "Using chinese apt mirror, because otherwise I cannot build this image 
     echo "Installing utilities." &&\
     apt-get install -f -y --no-install-recommends apt-utils &&\
 # get and update certificates, to hopefully resolve mscorefonts error
-    echo "Get and update certificates for mscorefonts." &&\
-    apt-get install -f -y --no-install-recommends ca-certificates &&\
-    update-ca-certificates &&\
+    # echo "Get and update certificates for mscorefonts." &&\
+    # apt-get install -f -y --no-install-recommends ca-certificates &&\
+    # update-ca-certificates &&\
 # install some utilitites and nice fonts, e.g., for Chinese and others
     echo "Installing utilities and nice fonts for Chinese and others." &&\
     apt-get install -f -y --no-install-recommends \
-          curl \
-          emacs-intl-fonts \
-          fontconfig \
-          fonts-arphic-bkai00mp \
-          fonts-arphic-bsmi00lp \
-          fonts-arphic-gbsn00lp \
-          fonts-arphic-gkai00mp \
-          fonts-arphic-ukai \
-          fonts-arphic-uming \
-          fonts-dejavu \
-          fonts-dejavu-core \
-          fonts-dejavu-extra \
-          fonts-droid-fallback \
-          fonts-guru \
-          fonts-guru-extra \
-          fonts-liberation \
-          fonts-noto-cjk \
-          fonts-opensymbol \
-          fonts-roboto \
-          fonts-roboto-hinted \
-          fonts-stix \
-          fonts-symbola \
-          fonts-texgyre \
-          fonts-unfonts-core \
-          ttf-wqy-microhei \
-          ttf-wqy-zenhei \
-          xfonts-intl-chinese \
-          xfonts-intl-chinese-big \
-          xfonts-wqy &&\
+        #   curl \
+        #   emacs-intl-fonts \
+        #   fontconfig \
+        #   fonts-arphic-bkai00mp \
+        #   fonts-arphic-bsmi00lp \
+        #   fonts-arphic-gbsn00lp \
+        #   fonts-arphic-gkai00mp \
+        #   fonts-arphic-ukai \
+        #   fonts-arphic-uming \
+        #   fonts-dejavu \
+        #   fonts-dejavu-core \
+        #   fonts-dejavu-extra \
+        #   fonts-droid-fallback \
+        #   fonts-guru \
+        #   fonts-guru-extra \
+        #   fonts-liberation \
+        #   fonts-noto-cjk \
+        #   fonts-opensymbol \
+        #   fonts-roboto \
+        #   fonts-roboto-hinted \
+        #   fonts-stix \
+        #   fonts-symbola \
+        #   fonts-texgyre \
+        #   fonts-unfonts-core \
+        #   ttf-wqy-microhei \
+        #   ttf-wqy-zenhei \
+        #   xfonts-intl-chinese \
+        #   xfonts-intl-chinese-big \
+        #   xfonts-wqy \
+          git &&\
 # now the microsoft core fonts
-    echo "Installing microsoft core fonts." &&\
-    echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections &&\
-    echo "ttf-mscorefonts-installer msttcorefonts/present-mscorefonts-eula note" | debconf-set-selections &&\
-    curl --output "/tmp/ttf-mscorefonts-installer.deb" "http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb" &&\
-    (apt install -f -y --no-install-recommends "/tmp/ttf-mscorefonts-installer.deb" || true) &&\
-    rm -f "/tmp/ttf-mscorefonts-installer.deb" &&\
+    # echo "Installing microsoft core fonts." &&\
+    # echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections &&\
+    # echo "ttf-mscorefonts-installer msttcorefonts/present-mscorefonts-eula note" | debconf-set-selections &&\
+    # curl --output "/tmp/ttf-mscorefonts-installer.deb" "http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb" &&\
+    # (apt install -f -y --no-install-recommends "/tmp/ttf-mscorefonts-installer.deb" || true) &&\
+    # rm -f "/tmp/ttf-mscorefonts-installer.deb" &&\
 # we make sure to contain the EULA in our container
-    curl --output "/root/mscorefonts-eula" "http://corefonts.sourceforge.net/eula.htm" &&\
-    echo "Installing TeX Live and ghostscript and other tools." &&\
+    # curl --output "/root/mscorefonts-eula" "http://corefonts.sourceforge.net/eula.htm" &&\
+    # echo "Installing TeX Live and ghostscript and other tools." &&\
 # install TeX Live and ghostscript as well as other tools
     apt-get install -f -y --no-install-recommends \
-          biber \
-          cm-super \
-          dvipng \
-          fonts-dejavu \
-          fonts-dejavu-core \
-          fonts-dejavu-extra \
-          ghostscript \
-          gnuplot \
-          make \
-          latex-cjk-all \
-          latex-cjk-common \
-          latex-cjk-chinese \
-          latexmk \
-          lcdf-typetools \
-          lmodern \
-          poppler-utils \
-          psutils \
-          purifyeps \
-          python3-pygments \
-          t1utils \
-          tex-gyre \
-          tex4ht \
+        #   biber \
+        #   cm-super \
+        #   dvipng \
+        #   fonts-dejavu \
+        #   fonts-dejavu-core \
+        #   fonts-dejavu-extra \
+        #   ghostscript \
+        #   gnuplot \
+        #   make \
+        #   latex-cjk-all \
+        #   latex-cjk-common \
+        #   latex-cjk-chinese \
+        #   latexmk \
+        #   lcdf-typetools \
+        #   lmodern \
+        #   poppler-utils \
+        #   psutils \
+        #   purifyeps \
+        #   python3-pygments \
+        #   t1utils \
+        #   tex-gyre \
+        #   tex4ht \
           texlive-base \
           texlive-bibtex-extra \
           texlive-binaries \
@@ -146,8 +147,8 @@ RUN echo "Using chinese apt mirror, because otherwise I cannot build this image 
     (rm -rf /usr/share/texlive/doc.html || true) &&\
     (rm -rf /usr/share/texlive/index.html || true) &&\
 # update font cache
-    echo "Update font cache." &&\
-    fc-cache -fv &&\
+    # echo "Update font cache." &&\
+    # fc-cache -fv &&\
 # clean up all temporary files
     echo "Clean up all temporary files." &&\
     apt-get clean -y &&\
